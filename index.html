@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfolio Mini - Giới thiệu bản thân</title>
+
+    <style>
+        /* Reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "Poppins", Arial, sans-serif;
+            background: linear-gradient(135deg, #6aa8ff, #d8e8ff);
+            color: #333;
+            padding-bottom: 40px;
+        }
+
+        /* Header */
+        .hero {
+            text-align: center;
+            padding: 60px 20px;
+            background: linear-gradient(135deg, #4a8bff, #6fa1ff);
+            color: pink;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* Hiệu ứng ánh sáng */
+        .hero::after {
+            content: "";
+            position: absolute;
+            top: -20%;
+            left: -20%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.25), transparent 60%);
+            animation: glow 6s infinite alternate;
+            pointer-events: none;
+        }
+
+        @keyframes glow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        .avatar {
+            width: 100px;
+            height: 1px;
+            border-radius: 50%;
+            border: 5px solid rgba(255,255,255,0.8);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+            margin-bottom: 15px;
+            transition: 0.4s;
+        }
+
+        .avatar:hover {
+            transform: scale(1.08);
+        }
+
+        .tagline {
+            font-style: italic;
+            opacity: 0.9;
+        }
+
+        /* Section + Card Glass */
+        section {
+            background: rgba(255,255,255,0.75);
+            backdrop-filter: blur(10px);
+            margin: 25px;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            animation: fadeIn 0.8s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to   { opacity: 1; transform: translateY(0); }
+        }
+
+        h2 {
+            color: #225fcc;
+            margin-bottom: 12px;
+        }
+
+        /* Project Items */
+        .projects .item {
+            background: #f0f5ff;
+            padding: 18px;
+            margin-bottom: 15px;
+            border-radius: 12px;
+            border-left: 6px solid #4a8bff;
+            transition: 0.3s;
+        }
+
+        .projects .item:hover {
+            transform: translateX(5px);
+            background: #ffdd3a;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 25px;
+            background: #4a8bff;
+            color: red;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+        }
+
+        footer a {
+            color: #67b3dd;
+            text-decoration: none;
+            transition: 0.3s;
+        }
+
+        footer a:hover {
+            text-shadow: 0 0 10px white;
+        }
+        /* --- STYLE CHO PHẦN MEDIA --- */
+.media-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr; /* Chia đôi màn hình */
+    gap: 20px;
+    margin-top: 15px;
+}
+
+.media-item {
+    background: #f0f5ff; /* Màu nền giống mục Projects */
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 6px solid #4a8bff; /* Viền xanh đồng bộ */
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: 0.3s;
+}
+
+/* Hiệu ứng hover chuyển màu vàng giống mục Projects */
+.media-item:hover {
+    transform: translateX(5px);
+    background: #ffdd3a; 
+}
+
+.media-head h3 {
+    color: #225fcc; /* Màu chữ xanh đậm của bạn */
+    font-size: 1.1rem;
+    margin-bottom: 5px;
+}
+
+.media-head p {
+    font-size: 0.9rem;
+    color: #555;
+    font-style: italic;
+    margin-bottom: 15px;
+}
+
+/* Style Video */
+.video-wrap video {
+    width: 100%;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+    background: #000;
+}
+
+/* Style Audio */
+.audio-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(255,255,255,0.5); /* Nền mờ nhẹ */
+    padding: 15px;
+    border-radius: 10px;
+}
+
+.audio-wrap audio {
+    width: 100%;
+    height: 35px;
+    margin-top: 15px;
+}
+
+/* Hiệu ứng đĩa than xoay */
+.disk-spin img {
+    width: 80px;
+    height: 80px;
+    border-radius: 50%;
+    animation: spinVinyl 6s linear infinite;
+}
+
+@keyframes spinVinyl {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+}
+
+/* --- HIỆU ỨNG CUỘN MƯỢT (Reveal) --- */
+.reveal {
+    opacity: 0;
+    transform: translateY(80px) scale(0.9);
+    /* Cubic-bezier giúp chuyển động nảy và êm hơn */
+    transition: all 1s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.reveal.active {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .media-grid {
+        grid-template-columns: 1fr; /* Xuống dòng trên điện thoại */
+    }
+}
+    </style>
+</head>
+<body>
+
+    <!-- Trang chủ -->
+    <header class="hero">
+        <img src="per.jpg" alt="C:\hoa\1.jpg" class="">
+        <h1>Nguyễn Thế Tường</h1>
+        <p class="tagline">"Luôn học hỏi và sáng tạo mỗi ngày"</p>
+    </header>
+
+    <!-- Giới thiệu bản thân -->
+    <section class="about">
+        <h2>Giới thiệu bản thân</h2>
+        <p><strong>Học vấn:</strong> Học sinh lớp 12a1 – THCS-THPT Minh Hoà</p>
+        <p><strong>Sở thích:</strong> đạp xe , đọc sách, chơi thể thao.</p>
+    </section>
+
+    <!-- Hoạt động / Sản phẩm -->
+<section class="projects">
+  <h2>Hoạt động & Sản phẩm</h2>
+
+  <div class="item">
+    <h3>1. Tham gia hội khỏe phù đổng cấp tỉnh</h3>
+    <img src="anh1.jpg" alt="Hội khỏe phù đổng" width="250">
+    <p>Đạt được giải nhất và nhì</p>
+  </div>
+
+  <div class="item">
+    <h3>2. Làm tinh thể bọt ngọt</h3>
+    <img src="anh2.jpg" alt="Tinh thể bọt ngọt" width="250">
+    <p>Sản phẩm tinh thể lấp lánh</p>
+  </div>
+
+  <div class="item">
+    <h3>3. Tham gia tổ chức ngày 20/11 cho thầy</h3>
+    <img src="anh3.jpg" alt="Hoạt động 20/11" width="250">
+    <p>Có một ngày thật là hạnh phúc và vui</p>
+  </div>
+</section>
+<section class="media-section reveal">
+    <h2>Góc Giải Trí</h2>
+    <div class="media-grid">
+        
+        <div class="media-item">
+            <div class="media-head">
+                <h3>🎬 Video</h3>
+                <p>Video giới thiệu</p>
+            </div>
+            <div class="video-wrap">
+                <video controls poster="anh1.jpg">
+                    <source src="tuongvid.mp4" type="video/mp4">
+                    Trình duyệt không hỗ trợ thẻ video.
+                </video>
+            </div>
+        </div>
+    </div>
+</section>
+
+    <!-- Footer -->
+    <footer>
+        <p>Liên hệ: nguyenthetuong.470@gmail.com</p>
+        <p>
+            Mạng xã hội:
+            <a href="https://www.facebook.com/share/17qFjBYrpo/">Facebook</a> |
+            <a href="https://www.instagram.com/tuongww_16108?igsh=NmphNzlka3JraTcx">Instagram</a>
+        </p>
+        <p>&copy; Nguyễn Thế Tường</p>
+    </footer>
+<script>
+    function revealOnScroll() {
+        var reveals = document.querySelectorAll(".reveal");
+        var windowHeight = window.innerHeight;
+        var elementVisible = 100;
+
+        for (var i = 0; i < reveals.length; i++) {
+            var elementTop = reveals[i].getBoundingClientRect().top;
+            if (elementTop < windowHeight - elementVisible) {
+                reveals[i].classList.add("active");
+            }
+        }
+    }
+
+    window.addEventListener("scroll", revealOnScroll);
+    // Gọi hàm một lần khi tải trang
+    revealOnScroll();
+</script>
+</body>
+</html>
